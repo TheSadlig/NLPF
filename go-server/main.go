@@ -5,6 +5,7 @@ import( "github.com/gin-gonic/gin"
         "os"
 	"time"
 	"encoding/json"
+	"reflect"
 	"fmt")
 
 
@@ -70,13 +71,43 @@ func main() {
     {
         "success": true,
         "data": {
-"errors" : ["Coucou !"]
+"errors" : ["Coucou !", "Hello"], "user":  "Roman"
 }
     }`)
 
+
 	err = json.Unmarshal(data, &parsed)
 	fmt.Println(err);
-	fmt.Println(parsed["id"]);
+	fmt.Println("JSON Content:");
+	fmt.Println(parsed["success"]);
+
+	for key, value := range parsed {
+		fmt.Println(reflect.TypeOf(value))
+		fmt.Println("1Key:", key, "Value:", value)
+		val, ok := value.(map[string]interface{})
+		if ok {
+			for k2, v2 := range val {
+				fmt.Println(reflect.TypeOf(v2))
+				fmt.Println("2Key:", k2, "Value:", v2)
+				
+				fmt.Println(reflect.TypeOf(v2))
+				val2, ok := v2.([]interface{})
+				if ok {
+					for k3, v3 := range val2 {
+						fmt.Println(reflect.TypeOf(v3))
+						fmt.Println("3Key:", k3, "Value:", v3)
+					}
+				}
+			}
+		}
+	}
+	/*
+	var parsedData map[string]interface{}
+	err = json.Unmarshal(, &parsedData)
+	fmt.Println(err);
+	fmt.Println(parsedData);
+	fmt.Println(parsedData["errors"]);
+	*/
 
 
 

@@ -1,3 +1,4 @@
+package main
 type Reward struct {
 	title string
 	description string
