@@ -1,0 +1,60 @@
+<!doctype html>
+<html ng-app="Tipz" ng-controller="tipzHandler">
+  <head>
+    <title> {{title}} </title>
+    <script 
+       src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.0/angular.min.js"></script>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <script src="home.js"> </script>
+  </head>
+  <body>
+		<!-- Navbar -->
+		<div class="navbar navbar-default navbar-fixed-top" role="navigation">
+			<div class="container">
+				<div class="navbar-header">
+					<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+						<span class="sr-only">Toggle Navigation</span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+					</button>
+					<a class="navbar-brand" href="home.html">Tipz</a>	
+				</div>
+				<div class="navbar-collapse collapse">
+					<ul class="nav navbar-nav navbar-right">
+						<li><a href="Blog.html">Ajouter un projet</a></li>
+						<li><a href="Portfolio.html">Les meilleurs projets</a></li>
+						<li><a href="Propos.html">Inscription</a></li>
+						<li><a href="Contact.html">Connexion</a></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+		<br />
+		<br />
+		<br />
+		<h1> {{title}} </h1>
+		
+		<table class="table">
+   			<thead>
+      			<tr>
+        			<th>Nom</th>
+        			<th>Gains</th>
+       				<th>Date de creation</th>
+       				<th>Description</th>
+       				<th>Participer</th>
+       			</tr>
+       		</thead>
+    		<tbody>
+      			<tr>
+       				 <td>John</td>
+        			 <td>Doe</td>
+        			 <td>john@example.com</td>
+        			 <td>Ceci est un super projet</td>
+        			 <td> <button>Participer !</button>
+     			</tr>
+
+    </tbody>
+  </table>	
+	</body>
+</html>
