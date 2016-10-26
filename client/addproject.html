@@ -1,0 +1,140 @@
+<!doctype html>
+<html ng-app="Tipz" ng-controller="tipzHandler">
+  <head>
+    <title> {{title}} </title>
+    <script 
+       src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.0/angular.min.js"></script>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <script src="addproject.js"> </script>
+  </head>
+  <body>
+		<!-- Navbar -->
+		<div class="navbar navbar-default navbar-fixed-top" role="navigation">
+			<div class="container">
+				<div class="navbar-header">
+					<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+						<span class="sr-only">Toggle Navigation</span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+					</button>
+					<a class="navbar-brand" href="home.html">Tipz</a>	
+				</div>
+				<div class="navbar-collapse collapse">
+					<ul class="nav navbar-nav navbar-right">
+						<li><a href="addproject.html">Ajouter un projet</a></li>
+						<li><a href="bestproject.html">Les meilleurs projets</a></li>
+						<li><a href="incription.html">Inscription</a></li>
+						<li><a href="connection.html">Connexion</a></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+		<br />
+		<br />
+		<br />
+		<div class="row">
+			<div class="col-xs-8">
+    			<div class="main">
+    				<div class="row">
+						<div class="col-xs-8 col-sm-6 col-sm-offset-1">
+							<h1> {{title}} </h1>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-6">
+				<div class="col-xs-40">
+    				<div class="main">
+    					<div class="row">
+							<div class="col-xs-40 col-sm-20 col-sm-offset-1">
+								<h2> Informations generales </h2>
+								<form class="form-horizontal" accept-charset="utf-8">
+									<div class="form-group">
+										<fieldset class="col-md-8">
+	  										<label for="newProjectName"> Nom du projet : </label>
+	 										<input name="newProjectName" ng-model="newProjectName" value="" class="form-control" type="text"/>
+										</fieldset>
+									</div>
+									<div class="form-group">
+										<fieldset class="col-md-8">
+	  										<label for="newProjectDescription"> Description : </label>
+											<input ng-model="newProjectDescription" name="newProjectDescription" value="" class="form-control" type="text"/>
+										</fieldset>
+									</div>
+									<div class="form-group">
+										<div class="col-md-offset-0 col-md-8">
+											<button ng-click="newProjectClick" class="btn btn-success btn btn-success" type="submit">
+												Enregistrer les modifications
+											</button>
+										</div>
+									</div>
+								</form>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-md-6">
+			<div class="col-xs-40">
+    				<div class="main">
+    					<div class="row">
+							<div class="col-xs-40 col-sm-20 col-sm-offset-1">
+								<h2> Contreparties </h2>
+								<form class="form-horizontal" accept-charset="utf-8">
+									<div class="form-group">
+										<fieldset class="col-md-8">
+	  										<label for="newRewardName"> Titre : </label>
+	 										<input name="newRewardName" ng-model="newRewardName" value="" class="form-control" type="text"/>
+										</fieldset>
+									</div>
+									<div class="form-group">
+										<fieldset class="col-md-8">
+	  										<label for="newRewardValue"> Valeur (en euros / mois) : </label>
+											<input ng-model="newRewardValue" name="newRewardValue" value="" class="form-control" type="text"/>
+										</fieldset>
+									</div>
+									<div class="form-group">
+										<fieldset class="col-md-8">
+	  										<label for="newRewardDescription"> Description : </label>
+	  										<input ng-model="newRewardDescription" name="newRewardDescription" value="" class="form-control" type="text"/>
+										</fieldset>
+									</div>
+									<div class="form-group">
+										<div class="col-md-offset-0 col-md-8">
+											<button ng-click="newRewardClick" class="btn btn-success btn btn-success" type="submit">
+ 			 									Ajouter une contrepartie
+											</button>
+										</div>
+									</div>
+								</form>
+								<table class="table">
+   									<thead class="thead-inverse">
+      									<tr>
+        									<th>Nom</th>
+        									<th>Valeur</th>
+       										<th>Description</th>
+       										<th>Modifier</th>
+											<th>Supprimer</th>
+       									</tr>
+       								</thead>
+    								<tbody>
+      									<tr>
+       				 						<td>John</td>
+        			 						<td>800 euros / mois</td>
+        			 						<td>Ceci est un super projet</td>
+        			 						<td> <button ng-click="modifyRewardClick">Modifier</button>
+        			 						<td> <button ng-click="deleteRewardClick">Supprimer</button>
+     									</tr>
+     								</tbody>
+     							</table>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</body>
+</html>

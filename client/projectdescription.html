@@ -5,7 +5,7 @@
     <script 
        src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.0/angular.min.js"></script>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-    <script src="home.js"> </script>
+    <script src="projectdescription.js"> </script>
   </head>
   <body>
 		<!-- Navbar -->
@@ -23,8 +23,8 @@
 				<div class="navbar-collapse collapse">
 					<ul class="nav navbar-nav navbar-right">
 						<li><a href="addproject.html">Ajouter un projet</a></li>
-						<li><a href="bestprojects.html">Les meilleurs projets</a></li>
-						<li><a href="inscription.html">Inscription</a></li>
+						<li><a href="bestproject.html">Les meilleurs projets</a></li>
+						<li><a href="incription.html">Inscription</a></li>
 						<li><a href="connection.html">Connexion</a></li>
 					</ul>
 				</div>
@@ -33,36 +33,28 @@
 		<br />
 		<br />
 		<br />
-<		div class="row">
-			<div class="col-xs-10">
-    			<div class="main">
-    				<div class="row">
-						<div class="col-xs-12 col-sm-10 col-sm-offset-1">
-							<h1> {{title}} </h1>
-							<table class="table">
-   								<thead>
-      								<tr>
-        								<th>Nom</th>
-        								<th>Gains</th>
-       									<th>Date de creation</th>
-       									<th>Description</th>
-       									<th>Participer</th>
-       								</tr>
-       							</thead>
-    							<tbody>
-      								<tr>
-       									<td>John</td>
-        			 					<td>Doe</td>
-        			 					<td>john@example.com</td>
-        			 					<td>Ceci est un super projet</td>
-        			 					<td> <button ng-click="participateClick">Participer !</button>
-     								</tr>
-     							</tbody>
-     						</table>	
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
+		<h1> {{title}} </h1>
+		<br />
+		<p> {{projectDescription}}</p>
+		<p>Par : {{projectAuthor}}</p>
+		<p>Contact : {{projectMail}}</p>
+		<table class="table">
+   			<thead>
+      			<tr>
+        			<th>Nom</th>
+        			<th>Valeur</th>
+       				<th>Description</th>
+       				<th>Selectionner</th>
+       			</tr>
+       		</thead>
+    		<tbody>
+      			<tr>
+       				 <td>John</td>
+        			 <td>Doe</td>
+        			 <td>Ceci est un super projet</td>
+        			 <td> <button ng-click="selectionClick">Selectionner !</button>
+     			</tr>
+     		</tbody>
+     	</table>	
 	</body>
 </html>

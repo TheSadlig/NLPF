@@ -1,0 +1,81 @@
+<!doctype html>
+<html ng-app="Tipz" ng-controller="tipzHandler">
+  <head>
+    <title> {{title}} </title>
+    <script 
+       src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.0/angular.min.js"></script>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <script src="inscription.js"> </script>
+  </head>
+  <body>
+		<!-- Navbar -->
+		<div class="navbar navbar-default navbar-fixed-top" role="navigation">
+			<div class="container">
+				<div class="navbar-header">
+					<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+						<span class="sr-only">Toggle Navigation</span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+					</button>
+					<a class="navbar-brand" href="home.html">Tipz</a>	
+				</div>
+				<div class="navbar-collapse collapse">
+					<ul class="nav navbar-nav navbar-right">
+						<li><a href="addproject.html">Ajouter un projet</a></li>
+						<li><a href="bestproject.html">Les meilleurs projets</a></li>
+						<li><a href="incription.html">Inscription</a></li>
+						<li><a href="connection.html">Connexion</a></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+		<br />
+		<br />
+		<br />
+		<div class="row">
+			<div class="col-xs-8">
+    			<div class="main">
+    				<div class="row">
+						<div class="col-xs-8 col-sm-6 col-sm-offset-1">
+							<h1> {{title}} </h1>
+							<form class="form-horizontal" accept-charset="utf-8">
+								<div class="form-group">
+									<fieldset class="col-md-8">
+	  									<label for="InscriptionLastname"> Nom : </label>
+	 									<input name="InscriptionLastname" ng-model="InscriptionLastname" value="" class="form-control" type="text"/>
+									</fieldset>
+								</div>
+								<div class="form-group">
+									<fieldset class="col-md-8">
+	  									<label for="InscriptionFirstname"> Prenom : </label>
+										<input ng-model="InscriptionFirstname" name="InscriptionFirstname" value="" class="form-control" type="text"/>
+									</fieldset>
+								</div>
+								<div class="form-group">
+									<fieldset class="col-md-8">
+	  									<label for="InscriptionMail"> Mail : </label>
+										<input ng-model="InscriptionMail" name="InscriptionMail" value="" class="form-control" type="text"/>
+									</fieldset>
+								</div>
+								<div class="form-group">
+									<fieldset class="col-md-8">
+										<label for="InscriptionPassword">Mot de passe : </label>
+										<input ng-model="InscriptionPassword" name="InscriptionPassword" value="" class="form-control" type="password"/>
+									</fieldset>
+								</div>
+								<div class="form-group">
+									<div class="col-md-offset-0 col-md-8">
+										<button ng-click="inscriptionClick" class="btn btn-success btn btn-success" type="submit">
+ 			 								S'inscrire
+										</button>
+									</div>
+								</div>
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</body>
+</html>
