@@ -3,7 +3,8 @@ package main
 import( "github.com/gin-gonic/gin"
 	"github.com/rhinoman/couchdb-go"
         "os"
-	"time")
+	"time"
+	"fmt")
 
 
 type Data struct {
@@ -37,13 +38,22 @@ func main() {
 // logger and recovery (crash-free) middleware
 	router := gin.Default()
 
-	var timeout = time.Duration(500 * time.Millisecond)
+	var timeout = time.Duration(50000 * time.Millisecond)
 	conn, err := couchdb.NewConnection("127.0.0.1",5984,timeout)
 	conn, err = conn, err
+	fmt.Println("eee");
+	fmt.Println(err);
 
-	auth := couchdb.BasicAuth{Username: "user", Password: "password" }
-	db := conn.SelectDB("myDatabase", &auth)
+	auth := couchdb.BasicAuth{Username: "admin", Password: "admin" }
 
+	err = conn.CreateDB("nlpf", &auth);
+		fmt.Println("fff");
+	fmt.Println(err);
+
+	db := conn.SelectDB("nlpf", &auth)
+		fmt.Println("ggg");
+	fmt.Println(err);
+	
 	theDoc := TestDocument{
 		Title: "My Document",
 		Note: "This is a note",
@@ -52,7 +62,8 @@ func main() {
 	theId := "zzz" //use whatever method you like to generate a uuid
 	rev, err := db.Save(theDoc, theId, "")
 	rev = rev
-	
+	fmt.Println("hhh");
+	fmt.Println(err);
 	router.GET("/v1/groupname", v1_groupname)
 	router.Run(":9090")
 }

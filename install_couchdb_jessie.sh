@@ -61,6 +61,7 @@ echo ""
 echo ""
 cp /etc/couchdb/local.ini /etc/couchdb/local_back.ini
 sed -i 's/;bind_address.*/bind_address=0.0.0.0/' /etc/couchdb/local.ini
+sed -i 's/;admin.*/admin = admin/' /etc/couchdb/local.ini
 echo "************ DONE *********"
 echo "You now need to edit /etc/couchdb/local.ini and add the following line to the httpd section"
 echo "bind_adress 0.0.0.0"
