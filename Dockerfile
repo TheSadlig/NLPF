@@ -16,12 +16,12 @@ RUN chmod +x launch.sh
 
 RUN go get github.com/rhinoman/couchdb-go
 RUN go get github.com/gin-gonic/gin
-RUN mkdir src
-WORKDIR /srv/src
+RUN mkdir go-server
+WORKDIR /srv/go-server
 
-ADD src /srv/src
+ADD go-server /srv/go-server
 
-RUN go build main.go
+RUN go build .
 CMD /srv/launch.sh
 
 EXPOSE 80 5984
