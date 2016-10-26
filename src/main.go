@@ -4,6 +4,7 @@ import( "github.com/gin-gonic/gin"
 	"github.com/rhinoman/couchdb-go"
         "os"
 	"time"
+	"encoding/json"
 	"fmt")
 
 
@@ -16,18 +17,16 @@ type TestDocument struct {
     Note string
 }        
 
-func v1_groupname(c *gin.Context) {
-
-
-     c.Writer.Header().Set("Content-Type","application/json")
-     c.Writer.WriteHeader(200)
-     value, success := os.LookupEnv("GroupName")
-     
-     if (success) {
-          c.Writer.Write([]byte("{\"status\": \"success\", \"data\": {\"groupname\" : \""+value+"\"}}"))
-     } else {
-          c.Writer.Write([]byte("{\"status\": \"success\", \"data\": {\"groupname\" : \"radon\"}}"))
-     }
+func v1_groupname(c *gin.Context) {	
+	c.Writer.Header().Set("Content-Type","application/json")
+	c.Writer.WriteHeader(200)
+	value, success := os.LookupEnv("GroupName")
+	
+	if (success) {
+		c.Writer.Write([]byte("{\"status\": \"success\", \"data\": {\"groupname\" : \""+value+"\"}}"))
+	} else {
+		c.Writer.Write([]byte("{\"status\": \"success\", \"data\": {\"groupname\" : \"radon\"}}"))
+	}
 
 //     c.JSON(200, gin.H{"status": "success", "data": {"groupname" : "radon"} })
                                                        
@@ -64,6 +63,24 @@ func main() {
 	rev = rev
 	fmt.Println("hhh");
 	fmt.Println(err);
+
+	var parsed map[string]interface{}
+
+	data := []byte(`
+    {
+        "success": true,
+        "data": {
+"errors" : ["Coucou !"]
+}
+    }`)
+
+	err = json.Unmarshal(data, &parsed)
+	fmt.Println(err);
+	fmt.Println(parsed["id"]);
+
+
+
+	
 	router.GET("/v1/groupname", v1_groupname)
 	router.Run(":9090")
 }
