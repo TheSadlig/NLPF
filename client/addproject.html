@@ -61,12 +61,12 @@
 									<div class="form-group">
 										<fieldset class="col-md-8">
 	  										<label for="newProjectDescription"> Description : </label>
-											<input ng-model="newProjectDescription" name="newProjectDescription" value="" class="form-control" type="text"/>
+											<textarea ng-model="newProjectDescription" name="newProjectDescription" value="" class="form-control" type="text"> </textarea>
 										</fieldset>
 									</div>
 									<div class="form-group">
 										<div class="col-md-offset-0 col-md-8">
-											<button ng-click="newProjectClick" class="btn btn-success btn btn-success" type="submit">
+											<button ng-click="newProjectClick()" class="btn btn-success btn btn-success" type="submit">
 												Enregistrer les modifications
 											</button>
 										</div>
@@ -93,25 +93,25 @@
 									<div class="form-group">
 										<fieldset class="col-md-8">
 	  										<label for="newRewardValue"> Valeur (en euros / mois) : </label>
-											<input ng-model="newRewardValue" name="newRewardValue" value="" class="form-control" type="text"/>
+											<input ng-model="newRewardValue" name="newRewardValue" value="" class="form-control" type="number"/>
 										</fieldset>
 									</div>
 									<div class="form-group">
 										<fieldset class="col-md-8">
 	  										<label for="newRewardDescription"> Description : </label>
-	  										<input ng-model="newRewardDescription" name="newRewardDescription" value="" class="form-control" type="text"/>
+	  										<textarea ng-model="newRewardDescription" name="newRewardDescription" value="" class="form-control" type="text"> </textarea>
 										</fieldset>
 									</div>
 									<div class="form-group">
 										<div class="col-md-offset-0 col-md-8">
-											<button ng-click="newRewardClick" class="btn btn-success btn btn-success" type="submit">
+											<button ng-click="newRewardClick()" class="btn btn-success btn btn-success" type="submit">
  			 									Ajouter une contrepartie
 											</button>
 										</div>
 									</div>
-								</form>
-								<table class="table">
-   									<thead class="thead-inverse">
+								</form>   							
+     							<table class="table" id="allRewards"> 
+     								<thead class="thead-inverse">
       									<tr>
         									<th>Nom</th>
         									<th>Valeur</th>
@@ -121,14 +121,13 @@
        									</tr>
        								</thead>
     								<tbody>
-      									<tr>
-       				 						<td>John</td>
-        			 						<td>800 euros / mois</td>
-        			 						<td>Ceci est un super projet</td>
-        			 						<td> <button ng-click="modifyRewardClick">Modifier</button>
-        			 						<td> <button ng-click="deleteRewardClick">Supprimer</button>
-     									</tr>
-     								</tbody>
+    									<tr ng-repeat = "p in rewards">
+    										<td>{{p.name}}</td>
+        			 						<td>{{p.value}}</td>
+        			 						<td><c ng-hide="p.showModif">{{p.desc}}</c> <textarea ng-model="p.desc" ng-show="p.showModif"></textarea></td>
+        			 						<td> <button ng-click="p.showModif = !p.showModif">Modifier</button>
+        			 						<td> <button ng-click="deleteRewardClick(p)">Supprimer</button>
+    									</tr>
      							</table>
 							</div>
 						</div>
