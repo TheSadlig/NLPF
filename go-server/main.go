@@ -4,7 +4,6 @@ import( "github.com/gin-gonic/gin"
 	"github.com/rhinoman/couchdb-go"
 	"time"
 	"encoding/json"
-	"reflect"
 	"fmt")
 
 func get_projects(c *gin.Context) {
@@ -14,13 +13,67 @@ func get_projects(c *gin.Context) {
 	c.JSON(200, gin.H{"success": true, "data": makeTransmittableProjectList(projects)})
 
 }
-/*projects := getProjects()
-	result := TransmittableResult{}
-	result.success = true
-	result.data = make(map[string]interface{})
-	result.data["projects"] = projects
-	c.JSON(200, result)
+
+func create_project(c *gin.Context) {
+	db := getDB()
+	
+	rawData := c.PostForm("data")
+
+
+	var parsed map[string]interface{}
+ /*
+ {"data": {
+"name": "Coucou",
+"desc": "yolo",
+"rewards" : [
+{ "name": "rew1", "value": "100", "desc": "rewdesc1"},
+{ "name": "rew1", "value" :"100", "desc": "rewdesc1"}
+],
+"date" : "03/12/1993",
+"userID" : "jyfjytfhytfjytfjytf"
+}                                                                                                               
+}
 */
+	data :=[]byte(rawData)
+
+	err := json.Unmarshal(data, &parsed)
+	fmt.Println(err);
+	fmt.Println("JSON Content:");
+	fmt.Println("parsed:", parsed);
+	fmt.Println("parsed:", parsed["data"]);
+	p := getEmptyProject()
+
+
+	val, ok := parsed["data"].(map[string]interface{})
+	fmt.Println(val)
+	if ok {
+		p.Description = val["desc"].(string)
+		p.Name = val["name"].(string)
+		p.Date = val["date"].(string)
+		p.User_ID = val["userID"].(string)
+		fmt.Println(p)
+		rawRewards := val["rewards"]
+		jsonRewards, ok := rawRewards.([]interface{})
+		if ok {
+			for _, v3 := range jsonRewards {
+				r, _ := v3.(map[string]interface{})
+				reward := getEmptyReward()
+				reward.Project_ID = p.ID
+				reward.Title = r["name"].(string)
+				reward.Description = r["desc"].(string)
+				value, _ := r["value"].(int)
+				reward.Value = value 
+				_, err = db.Save(&reward, reward.ID, "")
+			}
+		}
+	}
+	_, err = db.Save(&p, p.ID, "")
+	
+	c.JSON(200, gin.H{"success": true})
+
+}
+
+
 func getAuth() couchdb.BasicAuth {
 	return couchdb.BasicAuth{"admin", "admin"}
 }
@@ -54,47 +107,13 @@ func main() {
 
 	createDB()
 	
-	var parsed map[string]interface{}
 
-	data := []byte(`
-    {
-        "success": true,
-        "data": {
-"errors" : ["Coucou !", "Hello"], "user":  "Roman"
-}
-    }`)
-
-
-	err := json.Unmarshal(data, &parsed)
-	fmt.Println(err);
-	fmt.Println("JSON Content:");
-	fmt.Println(parsed["success"]);
-
-	for key, value := range parsed {
-		fmt.Println(reflect.TypeOf(value))
-		fmt.Println("1Key:", key, "Value:", value)
-		val, ok := value.(map[string]interface{})
-		if ok {
-			for k2, v2 := range val {
-				fmt.Println(reflect.TypeOf(v2))
-				fmt.Println("2Key:", k2, "Value:", v2)
-				
-				fmt.Println(reflect.TypeOf(v2))
-				val2, ok := v2.([]interface{})
-				if ok {
-					for k3, v3 := range val2 {
-						fmt.Println(reflect.TypeOf(v3))
-						fmt.Println("3Key:", k3, "Value:", v3)
-					}
-				}
-			}
-		}
-	}
 
 	createViews()
 
 	fmt.Println("Liste des projets: ", getProjects())
 	
 	router.GET("/api/getProjects", get_projects)
+	router.POST("/api/createProject", create_project)
 	router.Run(":9090")
 }
