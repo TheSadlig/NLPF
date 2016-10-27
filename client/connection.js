@@ -1,7 +1,16 @@
-var tipz = angular.module('Tipz', []);
-
-
-tipz.controller('tipzHandler', ['$scope', '$http', function ($scope, $http) {    
+tipz.controller('connection', ['$scope', '$http', function ($scope, $http) {    
     $scope.title = "Connexion";
     
+    
+    $scope.connectionUserID;
+    $scope.connectionPassword;
+    
+    $scope.connectionClick = function() {
+    
+    }
+
+    
+    $scope.redirection2Inscription = function() {
+    	$scope.page = "inscription.html";
+    }
 }]);

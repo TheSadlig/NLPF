@@ -1,12 +1,9 @@
-var tipz = angular.module('Tipz', []);
-
-
-tipz.controller('tipzHandler', ['$scope', '$http', function ($scope, $http) {    
+tipz.controller('home', ['$scope', '$http', function ($scope, $http) {    
     $scope.title = "Accueil";
 
     //Get the table with all project and display it
-    var projectList = {content:null};
-    var receivedData = {content:null};
+    var projectList = [];
+    var receivedData = [];
 
    $http.get("test.json")
     .success(function(data, status, headers, config) {

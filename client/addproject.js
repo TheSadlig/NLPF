@@ -1,11 +1,9 @@
-var tipz = angular.module('Tipz', []);
-
-
-tipz.controller('tipzHandler', ['$scope', '$http', function ($scope, $http) {    
+tipz.controller('addProject', ['$scope', '$http', function ($scope, $http) {    
     $scope.title = "Mon Project";
-    
+    console.log("plop")
     $scope.rewards = [];
     newProject = [];
+    $scope.newRewardValue = 0;
     
     $scope.newRewardClick = function() {
     	if (($scope.newRewardName != "") && ($scope.newRewardValue != "") && ($scope.newRewardDescription != "") && ($scope.newRewardName != null) && ($scope.newRewardValue != null) && ($scope.newRewardDescription != null) && ($scope.newRewardValue > 0)) {
@@ -22,15 +20,17 @@ tipz.controller('tipzHandler', ['$scope', '$http', function ($scope, $http) {
     	}
     }
     
-    $scope.deleteRewardClick = function(p) {
-    	var a = $scope.rewards.indexOf("p.name");
-    	var b = $scope.rewards.indexOf("p.value");
-    	var c = $scope.rewards.indexOf("p.desc");
-    	if ((a == b) && (a == c)) {
-    		$scope.rewards.splice(a,1);
-    		console.log("The reward has been removed from the list of rewards");
-    	}
+    $scope.loadFeed = function(e, p) {
+        var a = 0;
+        for(var i = 0; i < $scope.rewards.length; i++) {
+   			if($scope.rewards[i].name === p) {
+     			a = i;
+   			}
+		}
+    	$scope.rewards.splice(a, 1);
+    	console.log("The reward has been removed from the list of rewards");
     }
+    
     $scope.newProjectClick = function() {
     
     	if (($scope.newProjectName != null) && ($scope.newProjectDescription != null) && ($scope.newProjectName != "") && ($scope.newProjectDescription != "")) {
@@ -52,20 +52,37 @@ tipz.controller('tipzHandler', ['$scope', '$http', function ($scope, $http) {
     				mm='0'+mm
 				} 
 				today = dd+'/'+mm+'/'+yyyy;
+				
 				newProject.date = today;
-				newProject.author = "";
-				newProject.mail = "";
-
-    
-			/*    $http.post("test.json")
-    			.success(function(data, status, headers, config) {
-    				console.log(data);
-    				receivedData.content = data;
+				newProject.userID = "";
+/*{ 'data' : {
+        						'name' : newProject.name,
+        						'desc' :  newProject.desc,
+        						'rewards' : newProject.rewards,
+        						'date' : newProject.date,
+        						'userID' : newProject.userID
+        					}}*/
+        					
+				$http({
+        			url: 'http://localhost:9090/api/createProject',
+        			method: "GET",
+        			data: {test : "test"}
     			})
-    			.error(function(data, status, headers, config) {
-        			console.log("Error When Charging the JSON of all project from the Server");
-    			}); */
+    			.then(function(response) {
+        			console.log(response);
+        			console.log("Project successfully added to database");
+    			}, 
+    				function(response) {
+    				console.log(response);
+        			console.log("Error When posting the JSON of the project to the Server");
+    			});
+
     			console.log("Project added");
+    			
+    			newProject.name = "";
+    			newProject.desc = "";
+    			newProject.rewards = "";
+    			newProject.userID = "";
 			}
 			else {
         		console.log("There is no Rewards");

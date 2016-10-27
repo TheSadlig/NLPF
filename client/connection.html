@@ -1,35 +1,4 @@
-<!doctype html>
-<html ng-app="Tipz" ng-controller="tipzHandler">
-  <head>
-    <title> {{title}} </title>
-    <script 
-       src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.0/angular.min.js"></script>
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-    <script src="connection.js"> </script>
-  </head>
-  <body>
-		<!-- Navbar -->
-		<div class="navbar navbar-default navbar-fixed-top" role="navigation">
-			<div class="container">
-				<div class="navbar-header">
-					<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-						<span class="sr-only">Toggle Navigation</span>
-						<span class="icon-bar"></span>
-						<span class="icon-bar"></span>
-						<span class="icon-bar"></span>
-					</button>
-					<a class="navbar-brand" href="home.html">Tipz</a>	
-				</div>
-				<div class="navbar-collapse collapse">
-					<ul class="nav navbar-nav navbar-right">
-						<li><a href="addproject.html">Ajouter un projet</a></li>
-						<li><a href="bestproject.html">Les meilleurs projets</a></li>
-						<li><a href="inscription.html">Inscription</a></li>
-						<li><a href="connection.html">Connexion</a></li>
-					</ul>
-				</div>
-			</div>
-		</div>
+<div ng-controller="connection">
 		<br />
 		<br />
 		<br />
@@ -42,7 +11,7 @@
 							<form class="form-horizontal" accept-charset="utf-8">
 								<div class="form-group">
 									<fieldset class="col-md-8">
-	  									<label for="connectionName"> Identifiant : </label>
+	  									<label for="connectionUserID"> Identifiant : </label>
 	 									<input name="connectionName" ng-model="connectionName" value="" class="form-control" type="text"/>
 									</fieldset>
 								</div>
@@ -54,14 +23,14 @@
 								</div>
 								<div class="form-group">
 									<div class="col-md-offset-0 col-md-8">
-										<button ng-click="connection" class="btn btn-success btn btn-success" type="submit">
+										<button ng-click="connectionclick()" class="btn btn-success btn btn-success" type="submit">
  			 								Se connecter
 										</button>
 									</div>
 								</div>
 								<div class="form-group">
 									<div class="col-md-offset-0 col-md-8">
-										<a href="inscription.html">Se creer un compte</a>
+										<a ng-click="redirection2Inscription()">Se creer un compte</a>
 									</div>
 								</div>
 							</form>
@@ -70,5 +39,4 @@
 				</div>
 			</div>
 		</div>
-	</body>
-</html>
+</div>
