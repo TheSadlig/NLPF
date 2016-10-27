@@ -59,7 +59,7 @@ func getProjects() *[]Project {
 	return &projects
 }
 
-func getTransmittableProjectList(project *[]Project) *[]TransmittableProject {
+func makeTransmittableProjectList(project *[]Project) *[]TransmittableProject {
 	transmittableProjects := []TransmittableProject{}
 	
 	for _, p := range *project {

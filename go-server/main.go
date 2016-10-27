@@ -7,19 +7,20 @@ import( "github.com/gin-gonic/gin"
 	"reflect"
 	"fmt")
 
-
-type Data struct {
-    name string
-    data string
-}
-
 func get_projects(c *gin.Context) {
 
 	projects := getProjects()
-	c.JSON(200, getTransmittableProjectList(projects))
+		
+	c.JSON(200, gin.H{"success": true, "data": makeTransmittableProjectList(projects)})
 
 }
-
+/*projects := getProjects()
+	result := TransmittableResult{}
+	result.success = true
+	result.data = make(map[string]interface{})
+	result.data["projects"] = projects
+	c.JSON(200, result)
+*/
 func getAuth() couchdb.BasicAuth {
 	return couchdb.BasicAuth{"admin", "admin"}
 }
@@ -89,13 +90,6 @@ func main() {
 			}
 		}
 	}
-	/*
-	var parsedData map[string]interface{}
-	err = json.Unmarshal(, &parsedData)
-	fmt.Println(err);
-	fmt.Println(parsedData);
-	fmt.Println(parsedData["errors"]);
-	*/
 
 	createViews()
 
