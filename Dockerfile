@@ -16,6 +16,8 @@ RUN chmod +x launch.sh
 
 RUN go get github.com/rhinoman/couchdb-go
 RUN go get github.com/gin-gonic/gin
+RUN go get github.com/nu7hatch/gouuid
+
 RUN mkdir go-server
 WORKDIR /srv/go-server
 

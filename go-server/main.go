@@ -2,7 +2,6 @@ package main
 
 import( "github.com/gin-gonic/gin"
 	"github.com/rhinoman/couchdb-go"
-        "os"
 	"time"
 	"encoding/json"
 	"reflect"
@@ -13,24 +12,38 @@ type Data struct {
     name string
     data string
 }
-type TestDocument struct {
-    Title string
-    Note string
-}        
 
-func v1_groupname(c *gin.Context) {	
-	c.Writer.Header().Set("Content-Type","application/json")
-	c.Writer.WriteHeader(200)
-	value, success := os.LookupEnv("GroupName")
+func get_projects(c *gin.Context) {
+
+	projects := getProjects()
+	c.JSON(200, getTransmittableProjectList(projects))
+
+}
+
+func getAuth() couchdb.BasicAuth {
+	return couchdb.BasicAuth{"admin", "admin"}
+}
+
+func getConn () *couchdb.Connection {
+	var timeout = time.Duration(50000 * time.Millisecond)
+	conn, err := couchdb.NewConnection("127.0.0.1",5984,timeout)
+	fmt.Println(err)
+	return conn
+
+}
+func createDB () {
+	conn := getConn()
+	auth := getAuth()
+	err := conn.CreateDB("nlpf", &auth);
+	fmt.Println(err)
+}
+
+func getDB () *couchdb.Database {
+	conn := getConn()
+	auth := getAuth()
+	db := conn.SelectDB("nlpf", &auth)
 	
-	if (success) {
-		c.Writer.Write([]byte("{\"status\": \"success\", \"data\": {\"groupname\" : \""+value+"\"}}"))
-	} else {
-		c.Writer.Write([]byte("{\"status\": \"success\", \"data\": {\"groupname\" : \"radon\"}}"))
-	}
-
-//     c.JSON(200, gin.H{"status": "success", "data": {"groupname" : "radon"} })
-                                                       
+	return db
 }
 
 func main() {
@@ -38,33 +51,8 @@ func main() {
 // logger and recovery (crash-free) middleware
 	router := gin.Default()
 
-	var timeout = time.Duration(50000 * time.Millisecond)
-	conn, err := couchdb.NewConnection("127.0.0.1",5984,timeout)
-	conn, err = conn, err
-	fmt.Println("eee");
-	fmt.Println(err);
-
-	auth := couchdb.BasicAuth{Username: "admin", Password: "admin" }
-
-	err = conn.CreateDB("nlpf", &auth);
-		fmt.Println("fff");
-	fmt.Println(err);
-
-	db := conn.SelectDB("nlpf", &auth)
-		fmt.Println("ggg");
-	fmt.Println(err);
+	createDB()
 	
-	theDoc := TestDocument{
-		Title: "My Document",
-		Note: "This is a note",
-	}
-
-	theId := "zzz" //use whatever method you like to generate a uuid
-	rev, err := db.Save(theDoc, theId, "")
-	rev = rev
-	fmt.Println("hhh");
-	fmt.Println(err);
-
 	var parsed map[string]interface{}
 
 	data := []byte(`
@@ -76,7 +64,7 @@ func main() {
     }`)
 
 
-	err = json.Unmarshal(data, &parsed)
+	err := json.Unmarshal(data, &parsed)
 	fmt.Println(err);
 	fmt.Println("JSON Content:");
 	fmt.Println(parsed["success"]);
@@ -109,9 +97,10 @@ func main() {
 	fmt.Println(parsedData["errors"]);
 	*/
 
+	createViews()
 
-
+	fmt.Println("Liste des projets: ", getProjects())
 	
-	router.GET("/v1/groupname", v1_groupname)
+	router.GET("/api/getProjects", get_projects)
 	router.Run(":9090")
 }
