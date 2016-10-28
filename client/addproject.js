@@ -1,6 +1,8 @@
 tipz.controller('addProject', ['$scope', '$http', 'NavigationService', function ($scope, $http, NavigationService) {    
+
     if (!NavigationService.isConnected())
-		$scope.$parent.$parent.changePage("home.html");
+	$scope.$parent.$parent.changePage("home.html");
+
     $scope.title = "Mon Project";
     $scope.rewards = [];
     newProject = [];
@@ -8,19 +10,19 @@ tipz.controller('addProject', ['$scope', '$http', 'NavigationService', function 
     
     $scope.newRewardClick = function() {
 
-    	if (($scope.newRewardName != "") && ($scope.newRewardValue != "") && ($scope.newRewardDescription != "") && ($scope.newRewardName != null) && ($scope.newRewardValue != null) && ($scope.newRewardDescription != null) && ($scope.newRewardValue > 0)) {
-
+        if (($scope.newRewardName == null) || ($scope.newRewardName == ""))
+            $scope.$parent.$parent.error = "Mauvais nom de contrepartie";
+  	else if (($scope.newRewardValue == null) || $scope.newRewardValue == "" || ($scope.newRewardValue < 0))
+            $scope.$parent.$parent.error = "Une contrepartie doit etre positive";
+        else if($scope.newRewardDescription == null || $scope.newRewardDescription == "")
+            $scope.$parent.$parent.error = "La description doit etre complete";
+        else {
     	    $scope.rewards.push({name:$scope.newRewardName, value:$scope.newRewardValue, desc:$scope.newRewardDescription});
     	    $scope.newRewardName = "";
     	    $scope.newRewardValue = "";
     	    $scope.newRewardDescription = "";
-    	    console.log("Reward added");
-
-    	}
-    	else {
-    	    console.log("One or several label are empty or incorrect");
-    	}
-    }
+        }
+    };
     
     $scope.loadFeed = function(e, p) {
         var a = 0;
@@ -30,7 +32,6 @@ tipz.controller('addProject', ['$scope', '$http', 'NavigationService', function 
    	    }
 	}
     	$scope.rewards.splice(a, 1);
-    	console.log("The reward has been removed from the list of rewards");
     }
 
 
@@ -82,10 +83,7 @@ tipz.controller('addProject', ['$scope', '$http', 'NavigationService', function 
                 }).success(function(data){
                     console.log(data)
                 });
-                
-
-    		console.log("Project added");
-    		
+                    		
     		newProject.name = "";
     		newProject.desc = "";
     		newProject.rewards = "";
@@ -93,11 +91,13 @@ tipz.controller('addProject', ['$scope', '$http', 'NavigationService', function 
     		$scope.$parent.$parent.changePage("home.html");
 	    }
 	    else {
+                $scope.$parent.$parent.error = "Merci d'ajouter au moins une contrepartie";
         	console.log("There is no Rewards");
     	    }
     	}
     	else {
             console.log("One or several label are empty");
+            $scope.$parent.$parent.error = "L'un des champs est vide";
     	}
     }
 }]);
