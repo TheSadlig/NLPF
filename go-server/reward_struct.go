@@ -1,7 +1,6 @@
 package main
 
-import ("fmt"
-	"net/url")
+import ("net/url")
 
 
 type Reward struct {
@@ -31,7 +30,6 @@ func getInvestmentNumberByReward(rewardID string) float64 {
 	db.GetView("investment","get_investments_number_by_reward", &result, &parameters)
 	if len(result.Rows) > 0 {
 		r, _ := result.Rows[0].(map[string]interface{})
-		fmt.Println(r["value"])
 		return r["value"].(float64)
 	}
 	return 0
@@ -40,7 +38,6 @@ func getInvestmentNumberByReward(rewardID string) float64 {
 func getRewardFromMap(m map[string]interface{}) *Reward {
 	r, ok := m["value"].(map[string]interface{})
 	if ok {
-		fmt.Println(r)
 		rew := Reward{}
 		rew.Type = "Reward"
 		id, _ := r["ID"].(string)
@@ -66,9 +63,8 @@ func getRewardByProject(projectID string) (*[]Reward, float64) {
 	parameters := url.Values{}
 	parameters.Set("key", "\""+projectID+"\"")
 
-	err := db.GetView("rewards","get_rewards", &result, &parameters)
-	fmt.Println(err)
-
+	db.GetView("rewards","get_rewards", &result, &parameters)
+	
 	rewards := []Reward{}
 	rewards = rewards
 	projectIncome := float64(0)
@@ -78,7 +74,6 @@ func getRewardByProject(projectID string) (*[]Reward, float64) {
 			r := getRewardFromMap(m)
 			r.InvestorNumber = getInvestmentNumberByReward(r.ID)
 			projectIncome += r.InvestorNumber * r.Value
-			fmt.Println("incom:", projectIncome)
 			if r != nil {
 				rewards = append(rewards, *r)
 			}

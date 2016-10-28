@@ -1,6 +1,5 @@
 package main
-import ("fmt"
-	"github.com/rhinoman/couchdb-go"
+import ("github.com/rhinoman/couchdb-go"
 	"time"
 	"github.com/nu7hatch/gouuid"
 )
@@ -79,54 +78,49 @@ func createDummyProject() string{
 	db := getDB()
 
 	u := getEmptyUser()
-	u.Lastname = "Thiaw-Kine"
-	u.Firstname = "Roman"
-	u.Mail = "thiaw-_r@epita.fr"
-	u.Password = "dicks"
+	u.Lastname = "Le fossoyeur"
+	u.Firstname = "de films"
+	u.Mail = "fossoyeur@hotmail.com"
+	u.Password = "Coucou"
 
-	_, err := db.Save(&u, u.ID, "")
+	db.Save(&u, u.ID, "")
 	
 	project := getEmptyProject()
 	
-	project.Name= "ProjName"
-	project.Description= "DescProj"
+	project.Name = "Episode du fossoyeur de film"
+	project.Description = "« Le Fossoyeur de Films » est le concept principal de ma chaîne Youtube et me permet d’analyser des thématiques pointues sur un ton fantaisiste. La chaîne abrite aussi d’autres émissions : « L’après-séance » (des chroniques de films récemment sortis en salles), « Retour sur le futur » (où il est question de futures sortes et de ce que l’on peut en attendre) ou encore « Dead Watts » (des vidéos musicales décalées). Je réalise et mets en ligne trois vidéos par mois en moyenne, voire quatre ou plus selon la productivité et l’actualité du moment. Je travaille seul sur mes productions et elles me demandent tellement de temps, d’énergie et d’investissement que je ne pourrais pas mener ce projet autrement qu’à 200%. Voulant continuer à vous proposer des contenus réguliers et de qualité, j’ai donc décidé de faire de cette activité de vidéaste mon métier à temps plein. Vivre d’une passion : un pari assez incroyable que vous me permettez déjà de relever grâce à votre soutien et à votre curiosité, ce pour quoi je vous suis extrêmement reconnaissant. Toutefois, à moins de cumuler plusieurs millions de vues par vidéo, il est très difficile de vivre correctement de cette activité. En attendant de grandir, il faut donc se diversifier. "
+
 	project.User_ID= u.ID
-	project.Date = "03/12/1993"
+	project.Date = "03/12/2015"
 	
-	_, err = db.Save(&project, project.ID, "")
+	db.Save(&project, project.ID, "")
 
 	r:= getEmptyReward()	
-	r.Title = "Pas cher"
-	r.Description = "c'est trop pas cher"
-	r.Value = 500
+	r.Title = "Pour 1€ et plus"
+	r.Description = "Vous avez accès à mon fil d’actualité Tipz"
+	r.Value = 1
 	r.Project_ID = project.ID
+	db.Save(&r, r.ID, "")
 
 	r2:= getEmptyReward()	
-	r2.Title = "Pas cher2"
-	r2.Description = "c'est trop pas cher2"
-	r2.Value = 2500
+	r2.Title = "Pour 3€ et plus"
+	r2.Description = "Vous avez accès à mon fil d'actualité Tipz et je vous envoie le générique du Fossoyeur de Films en mp3 et/ou .wav"
+	r2.Value = 3
 	r2.Project_ID = project.ID
+	db.Save(&r2, r2.ID, "")
 	
 	r3:= getEmptyReward()	
-	r3.Title = "Pas cher3"
-	r3.Description = "c'est trop pas cher3"
-	r3.Value = 3500
+	r3.Title = "Pour 5€ et plus"
+	r3.Description = " Vous avez accès à mon fil d'actualité Tipz + je vous envoie le générique du Fossoyeur de Films en mp3 et/ou .wav + vous avez accès en avant-première au bêtisier vidéo de l'épisode soutenu "
+	r3.Value = 5
 	r3.Project_ID = project.ID
+	db.Save(&r3, r3.ID, "")
 	
 
-	id, err := db.Save(&r, r.ID, "")
-	id, err = db.Save(&r2, r2.ID, "")
-	id, err = db.Save(&r3, r3.ID, "")
 
 	emptyProject := Project{}
-	_, err = db.Read(project.ID, &emptyProject, nil)
-	fmt.Println(emptyProject)
-	//	u := User{Lastname: "Gildas", Firstname: "Lebel", Mail: "ezmfiej@qzefq.fe", Password: "ezeq"}
+	db.Read(project.ID, &emptyProject, nil)
 
-
-	
-	fmt.Println("err", err)
-	fmt.Println("DocRev", id)
 	return project.ID
 }
 

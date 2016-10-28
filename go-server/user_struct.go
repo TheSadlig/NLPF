@@ -1,7 +1,6 @@
 package main
 
-import ("net/url"
-	"fmt")
+import ("net/url")
 type User struct {
 	Type string
 	ID string
@@ -45,6 +44,5 @@ func getUserByMail(userMAil string) *User {
 		password, _ := u["Password"].(string)
 		user.Password = password
 	}
-	fmt.Println(user)
 	return &user
 }

@@ -1,13 +1,12 @@
 package main
 
 import( "github.com/gin-gonic/gin"
-	"encoding/json"
-	"fmt")
+	"encoding/json")
 
 func get_projects(c *gin.Context) {
 
 	projects := getProjects()
-		
+	
 	c.JSON(200, gin.H{"success": true, "data": makeTransmittableProjectList(projects)})
 }
 
@@ -45,7 +44,6 @@ func create_project(c *gin.Context) {
 	val, ok := parsed["data"].(map[string]interface{})
 
 	if ok {
-		fmt.Println(val)
 		p.Description = val["desc"].(string)
 		p.Name = val["name"].(string)
 		p.Date = val["date"].(string)
@@ -169,8 +167,8 @@ func invest(c *gin.Context) {
 
 
 func main() {
-// Creates a gin router with default middleware:
-// logger and recovery (crash-free) middleware
+	// Creates a gin router with default middleware:
+	// logger and recovery (crash-free) middleware
 	//	router := gin.Default()
 	r := gin.New()
 	r.Use(func (c *gin.Context) {
@@ -187,8 +185,6 @@ func main() {
 
 
 	createViews()
-
-	fmt.Println("Liste des projets: ", getProjects())
 	
 	r.GET("/api/getProjects", get_projects)
 	

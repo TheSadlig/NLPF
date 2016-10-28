@@ -1,36 +1,36 @@
 <div ng-controller="home">
-		<br />
-		<br />
-		<br />
-		<div class="row">
-			<div class="col-xs-10">
-    			<div class="main">
-    				<div class="row">
-						<div class="col-xs-12 col-sm-10 col-sm-offset-1">
-							<h1> {{title}} </h1>
-     							<table class="table">
-     							<thead class="thead-inverse">
-      								<tr>
-        								<th>Nom</th>
-        								<th>Gains</th>
-       									<th>Date de creation</th>
-       									<th>Description</th>
-       									<th ng-show="isConnected">Participer</th>
-       								</tr>
-       							</thead>
-    							<tbody>
-    								<tr ng-repeat = "p in projects | orderBy:'Date'">
-    									<td>{{p.Name}}</td>
-    									<td>{{p.Income}} euros / mois</td>
-        			 					<td>{{p.Date}}</td>
-        			 					<td>{{p.Description}}</td>
-        			 					<td ng-show="isConnected"> <button ng-click="loadFeed($event,p)">Participer !</button>
-    								</tr>
-    							</tbody>
-     						</table>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
+  <br />
+  <br />
+  <br />
+  <div class="row">
+    <div class="col-xs-10">
+      <div class="main">
+    	<div class="row">
+	  <div class="col-xs-12 col-sm-10 col-sm-offset-1">
+	    <h1> {{title}} </h1>
+     	    <table class="table">
+     	      <thead class="thead-inverse">
+      		<tr>
+        	  <th>Nom</th>
+        	  <th>Gains</th>
+       		  <th>Date de creation</th>
+       		  <th>Description</th>
+       		  <th ng-show="isConnected">Participer</th>
+       		</tr>
+       	      </thead>
+    	      <tbody>
+    		<tr ng-repeat = "p in projects | orderBy:'-Date'">
+    		  <td>{{p.Name}}</td>
+    		  <td>{{p.Income}} euros / mois</td>
+        	  <td>{{p.Date}}</td>
+        	  <td>{{p.Description}}</td>
+        	  <td ng-show="isConnected"> <button ng-click="loadFeed($event,p)">Participer</button>
+    		</tr>
+    	      </tbody>
+     	    </table>
+	  </div>
+	</div>
+      </div>
+    </div>
+  </div>
 </div>
