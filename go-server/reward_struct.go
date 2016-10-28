@@ -10,7 +10,7 @@ type Reward struct {
 	Project_ID string
 	Title string
 	Description string
-	Value int
+	Value float64
 }
 
 func getEmptyReward() *Reward {
@@ -34,7 +34,7 @@ func getRewardFromMap(m map[string]interface{}) *Reward {
 		rew.Title = title
 		description, _ := r["Description"].(string)
 		rew.Description = description
-		value, _ := r["Value"].(int)
+		value, _ := r["Value"].(float64)
 
 		rew.Value = value
 		return &rew

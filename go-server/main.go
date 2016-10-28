@@ -65,8 +65,8 @@ func create_project(c *gin.Context) {
 				reward.Project_ID = p.ID
 				reward.Title = r["name"].(string)
 				reward.Description = r["desc"].(string)
-				value, _ := r["value"].(int)
-				reward.Value = value 
+				value, _ := r["value"].(float64)
+				reward.Value = value
 				_, err = db.Save(&reward, reward.ID, "")
 			}
 		}
