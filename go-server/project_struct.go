@@ -39,6 +39,15 @@ func getEmptyProject() *Project {
 	return &project
 }
 
+func getProjectById(projectID string) *Project {
+	db := getDB();
+	
+	result := Project{}
+	_, _ = db.Read(projectID, &result, nil)
+
+	return &result
+}
+
 func getProjects() *[]Project {
 	db := getDB();
 

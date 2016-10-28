@@ -9,7 +9,25 @@ func get_projects(c *gin.Context) {
 	projects := getProjects()
 		
 	c.JSON(200, gin.H{"success": true, "data": makeTransmittableProjectList(projects)})
+}
 
+func get_projects_by_id(c *gin.Context) {
+
+	rawData := c.PostForm("data")
+
+	var parsed map[string]interface{}
+	data :=[]byte(rawData)
+
+	json.Unmarshal(data, &parsed)
+
+	val, ok := parsed["data"].(map[string]interface{})
+	project := Project{}
+	if ok {
+		ID := val["ID"].(string)
+		project = *getProjectById(ID)
+	}
+
+	c.JSON(200, gin.H{"success": true, "data": getTransmittableProject(project)})
 }
 
 func create_project(c *gin.Context) {
@@ -112,7 +130,8 @@ func main() {
 	fmt.Println("Liste des projets: ", getProjects())
 	
 	r.GET("/api/getProjects", get_projects)
-	r.POST("/api/getRewardsByProject", create_user)
+	
+	r.POST("/api/getProjectById", get_projects_by_id)
 	
 	r.POST("/api/createProject", create_project)
 	r.POST("/api/createUser", create_user)

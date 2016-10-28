@@ -139,14 +139,7 @@ func getUserById(userID string) *User {
 	return &result
 }
 
-func getProjectById(projectID string) *Project {
-	db := getDB();
-	
-	result := Project{}
-	_, _ = db.Read(projectID, &result, nil)
 
-	return &result
-}
 
 
 
