@@ -3,7 +3,7 @@ tipz.controller('home', ['$scope', '$http', 'NavigationService', function ($scop
 
     //Get the table with all project and display it
     $scope.projects = [];
-
+    console.log(NavigationService.User)
     $http.get('http://localhost:9090/api/getProjects')
         .success(function(data, status, headers, config) {
     	    //console.log(data.data);

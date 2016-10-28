@@ -29,11 +29,13 @@ tipz.controller('connection', ['$scope', '$http', 'NavigationService', function 
                 }).success(function(data){
                     console.log(data)
                     if (data.success == true) {
-                    	NavigationService.setUser(data.User);
+                    	NavigationService.setUser(data.data);
                     	$scope.$parent.$parent.page = "home.html";
+                        $scope.$parent.$parent.isConnected = true; // Ugly but works ;)
                     }
                     else {
                     	console.log("Wrong Login / Password");
+                        $scope.$parent.$parent.error = "Wrong login/password";
                     }
                 });
     };

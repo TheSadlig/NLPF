@@ -45,6 +45,7 @@ func create_project(c *gin.Context) {
 	val, ok := parsed["data"].(map[string]interface{})
 
 	if ok {
+		fmt.Println(val)
 		p.Description = val["desc"].(string)
 		p.Name = val["name"].(string)
 		p.Date = val["date"].(string)

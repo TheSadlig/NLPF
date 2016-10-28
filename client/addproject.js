@@ -1,4 +1,6 @@
 tipz.controller('addProject', ['$scope', '$http', 'NavigationService', function ($scope, $http, NavigationService) {    
+    if (!NavigationService.isConnected())
+		$scope.$parent.$parent.page = "home.html";
     $scope.title = "Mon Project";
     $scope.rewards = [];
     newProject = [];
@@ -8,25 +10,25 @@ tipz.controller('addProject', ['$scope', '$http', 'NavigationService', function 
 
     	if (($scope.newRewardName != "") && ($scope.newRewardValue != "") && ($scope.newRewardDescription != "") && ($scope.newRewardName != null) && ($scope.newRewardValue != null) && ($scope.newRewardDescription != null) && ($scope.newRewardValue > 0)) {
 
-    		$scope.rewards.push({name:$scope.newRewardName, value:$scope.newRewardValue, desc:$scope.newRewardDescription});
-    		$scope.newRewardName = "";
-    		$scope.newRewardValue = "";
-    		$scope.newRewardDescription = "";
-    		console.log("Reward added");
+    	    $scope.rewards.push({name:$scope.newRewardName, value:$scope.newRewardValue, desc:$scope.newRewardDescription});
+    	    $scope.newRewardName = "";
+    	    $scope.newRewardValue = "";
+    	    $scope.newRewardDescription = "";
+    	    console.log("Reward added");
 
     	}
     	else {
-    		console.log("One or several label are empty or incorrect");
+    	    console.log("One or several label are empty or incorrect");
     	}
     }
     
     $scope.loadFeed = function(e, p) {
         var a = 0;
         for(var i = 0; i < $scope.rewards.length; i++) {
-   			if($scope.rewards[i].name === p) {
-     			a = i;
-   			}
-		}
+   	    if($scope.rewards[i].name === p) {
+     		a = i;
+   	    }
+	}
     	$scope.rewards.splice(a, 1);
     	console.log("The reward has been removed from the list of rewards");
     }

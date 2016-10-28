@@ -1,8 +1,12 @@
 var tipz = angular.module('Tipz', []);
 
-tipz.controller('index', ['$scope', '$http', function ($scope, $parent, $http) { 
+
+tipz.controller('index', ['$scope', '$http', 'NavigationService', function ($scope, $parent, $http, NavigationService) { 
     $scope.page = "'home.html'";
+    $scope.isConnected = false;
+    $scope.error = "";
 }]);
+
 
 // All data used for navigation
 tipz.factory('NavigationService', function() {
@@ -24,6 +28,10 @@ tipz.factory('NavigationService', function() {
     var setUser = function (User) {
     	this.User = User;
     }
+    var isConnected = function () {
+        console.log(this.User)
+        return this.User != {};
+    }
     
     return {
         projectID: "",
@@ -35,6 +43,7 @@ tipz.factory('NavigationService', function() {
         setPage: setPage,
         setReward: setReward,
         setProject: setProject,
-        setUser: setUser
+        setUser: setUser,
+        isConnected: isConnected
     };
 });
