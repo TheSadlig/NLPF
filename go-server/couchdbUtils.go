@@ -143,12 +143,15 @@ func getUserById(userID string) *User {
 
 
 
-func createView(viewName string, designName string, code string) {
+func createView(viewName string, designName string, mapCode string, reduceCode string) {
 	db := getDB();
 	
 	
 	view := View{
-		Map: code}
+		Map: mapCode}
+	if (reduceCode != "") {
+		view.Reduce = reduceCode
+	}
 		
 	views := make(map[string]View)
 	
@@ -164,9 +167,13 @@ func createView(viewName string, designName string, code string) {
 func createViews() {
 	createDummyProject()
 
-	createView("get_projects", "projects", "function(doc) {\n  if (doc.Type == \"Project\"){\n    emit(doc.ID, doc)\n  }\n}")
-	createView("get_rewards", "rewards", "function(doc) {\n if (doc.Type == \"Reward\") {\n    emit(doc.Project_ID, doc);\n  }\n}")
-	createView("get_users_by_mail", "user_mail", "function(doc) {\n if (doc.Type == \"User\") {\n    emit(doc.Mail, doc);\n  }\n}")
-	createView("get_users", "user", "function(doc) {\n if (doc.Type == \"User\") {\n    emit(doc.ID, doc);\n  }\n}")
+	createView("get_projects", "projects", "function(doc) {\n  if (doc.Type == \"Project\"){\n    emit(doc.ID, doc)\n  }\n}", "")
+	createView("get_rewards", "rewards", "function(doc) {\n if (doc.Type == \"Reward\") {\n    emit(doc.Project_ID, doc);\n  }\n}", "")
+	createView("get_users_by_mail", "user_mail", "function(doc) {\n if (doc.Type == \"User\") {\n    emit(doc.Mail, doc);\n  }\n}", "")
+	createView("get_users", "user", "function(doc) {\n if (doc.Type == \"User\") {\n    emit(doc.ID, doc);\n  }\n}", "")
+	createView("get_investments_number_by_reward",
+		"investment",
+		"function(doc) {\n if (doc.Type == \"Investment\")\n emit(doc.Reward_ID, 1);\n }",
+		"function(keys, values) { \n return sum(values); \n }")
 	
 }

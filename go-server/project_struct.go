@@ -28,8 +28,7 @@ type TransmittableProject struct {
 	Author string
 	Date string
 	Mail string
-	Income int
-	
+	Income float64	
 }
 
 func getEmptyProject() *Project {
@@ -82,7 +81,6 @@ func makeTransmittableProjectList(project *[]Project) *[]TransmittableProject {
 func getProjectFromMap(m map[string]interface{}) *Project {
 	r, ok := m["value"].(map[string]interface{})
 	if ok {
-		fmt.Println(r)
 		project := Project{}
 		project.Type = "Project"
 		id, _ := r["ID"].(string)
@@ -109,15 +107,15 @@ func getTransmittableProject(project Project) *TransmittableProject {
 	transmitProject.Description = project.Description
 	transmitProject.Date = project.Date
 	transmitProject.ID = project.ID
-	transmitProject.Rewards = *getRewardByProject(project.ID)
+	a, b := getRewardByProject(project.ID)
+	transmitProject.Rewards = *a
+	transmitProject.Income = b
 	fmt.Println("transmit:", transmitProject)
 	user := getUserById(project.User_ID)
 	fmt.Println("user:", user)
 	
 	transmitProject.Author = user.Firstname + " "+ user.Lastname
 	transmitProject.Mail = user.Mail
-	transmitProject.Income = 0
-
 	
 	return &transmitProject
 }
