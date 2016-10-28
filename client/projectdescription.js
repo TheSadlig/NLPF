@@ -1,5 +1,5 @@
-tipz.controller('projectdescription', ['$scope', '$http', 'UserService', 'NavigationService',
-                                       function ($scope, $http, UserService, NavigationService) {    
+tipz.controller('projectdescription', ['$scope', '$http', 'NavigationService',
+                                       function ($scope, $http, NavigationService) {    
                 
                 
                  

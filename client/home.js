@@ -1,4 +1,4 @@
-tipz.controller('home', ['$scope', '$http', 'UserService', 'NavigationService', function ($scope, $http, UserService, NavigationService) {    
+tipz.controller('home', ['$scope', '$http', 'NavigationService', function ($scope, $http, NavigationService) {    
     $scope.title = "Accueil";
 
     //Get the table with all project and display it

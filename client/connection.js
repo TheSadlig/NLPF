@@ -1,4 +1,4 @@
-tipz.controller('connection', ['$scope', '$http', 'UserService', 'NavigationService', function ($scope, $http, UserService, NavigationService) {    
+tipz.controller('connection', ['$scope', '$http', 'NavigationService', function ($scope, $http, NavigationService) {    
     $scope.title = "Connexion";
     
 

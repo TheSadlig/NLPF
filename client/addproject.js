@@ -1,4 +1,4 @@
-tipz.controller('addProject', ['$scope', '$http', 'UserService', 'NavigationService', function ($scope, $http, UserService, NavigationService) {    
+tipz.controller('addProject', ['$scope', '$http', 'NavigationService', function ($scope, $http, NavigationService) {    
     $scope.title = "Mon Project";
     $scope.rewards = [];
     newProject = [];

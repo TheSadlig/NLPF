@@ -1,4 +1,4 @@
-tipz.controller('rewarddescription', ['$scope', '$http', 'UserService', 'NavigationService', function ($scope, $http, UserService, NavigationService) {    
+tipz.controller('rewarddescription', ['$scope', '$http', 'NavigationService', function ($scope, $http, NavigationService) {    
     $scope.title = "Je participe !";
     
     $scope.rewardClick = function() {
