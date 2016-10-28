@@ -1,4 +1,4 @@
-<div ng-controller="home">
+<div ng-controller="bestproject">
 		<br />
 		<br />
 		<br />
@@ -15,16 +15,16 @@
         								<th>Gains</th>
        									<th>Date de creation</th>
        									<th>Description</th>
-       									<th>Participer</th>
+       									<th ng-show="isConnected">Participer</th>
        								</tr>
        							</thead>
     							<tbody>
-    								<tr ng-repeat = "p in projects">
+    								<tr ng-repeat = "p in projects | orderBy:'-Income'">
     									<td>{{p.Name}}</td>
     									<td>{{p.Income}}</td>
         			 					<td>{{p.Date}}</td>
         			 					<td>{{p.Description}}</td>
-        			 					<td> <button ng-click="loadFeed($event,p)">Participer !</button>
+        			 					<td ng-show="isConnected"> <button ng-click="loadFeed($event,p)">Participer !</button>
     								</tr>
     							</tbody>
      						</table>

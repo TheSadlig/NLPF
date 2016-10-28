@@ -4,7 +4,7 @@ tipz.controller('rewarddescription', ['$scope', '$http', 'NavigationService', fu
     $scope.rewardClick = function() {
 			$http({
                     method: 'POST',
-                    url: "http://localhost:9090/api/",
+                    url: "http://localhost:9090/api/invest",
                     data: {data:
                            { data:
                              {rewardID: NavigationService.reward.ID,

@@ -29,8 +29,8 @@ tipz.factory('NavigationService', function() {
     	this.User = User;
     }
     var isConnected = function () {
-        console.log(this.User)
-        return this.User != {};
+        console.log(this.User);
+        return this.User != null && this.User.ID != null;
     }
     
     return {

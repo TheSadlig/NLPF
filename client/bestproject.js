@@ -1,8 +1,10 @@
-tipz.controller('bestproject', ['$scope', '$http', function ($scope, $http) {    
+tipz.controller('bestproject', ['$scope', '$http', 'NavigationService', function ($scope, $http, NavigationService) {    
     $scope.title = "Les meilleurs projets";
-    
- $scope.projects = [];
 
+    //Get the table with all project and display it
+    $scope.projects = [];
+    $scope.isConnected = NavigationService.isConnected();
+	
     $http.get('http://localhost:9090/api/getProjects')
         .success(function(data, status, headers, config) {
     	    //console.log(data.data);
