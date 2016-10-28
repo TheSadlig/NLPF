@@ -21,7 +21,7 @@
     							<tbody>
     								<tr ng-repeat = "p in projects | orderBy:'-Income'">
     									<td>{{p.Name}}</td>
-    									<td>{{p.Income}}</td>
+    									<td>{{p.Income}} euros /mois </td>
         			 					<td>{{p.Date}}</td>
         			 					<td>{{p.Description}}</td>
         			 					<td ng-show="isConnected"> <button ng-click="loadFeed($event,p)">Participer !</button>

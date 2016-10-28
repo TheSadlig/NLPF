@@ -92,7 +92,7 @@
     								<tbody>
     									<tr ng-repeat = "p in rewards">
     										<td>{{p.name}}</td>
-        			 						<td>{{p.value}}</td>
+        			 						<td>{{p.value}} euros / mois</td>
         			 						<td><c ng-hide="p.showModif">{{p.desc}}</c> <textarea ng-model="p.desc" ng-show="p.showModif"></textarea></td>
         			 						<td> <button ng-click="p.showModif = !p.showModif">Modifier</button>
         			 						<td> <button ng-click="loadFeed($event,p.name)">Supprimer</button>
