@@ -71,6 +71,32 @@ func create_project(c *gin.Context) {
 
 }
 
+func connect_user(c *gin.Context) {
+	rawData := c.PostForm("data")
+
+	var parsed map[string]interface{}
+	data :=[]byte(rawData)
+
+	json.Unmarshal(data, &parsed)
+
+	val, ok := parsed["data"].(map[string]interface{})
+	mail := ""
+	password := ""
+	
+	if ok {
+		mail = val["mail"].(string)
+		password = val["password"].(string)
+	}
+
+	existant := getUserByMail(mail)
+	
+	if existant.ID == "" || existant.Password != password {
+		c.JSON(200, gin.H{"success": false})
+	} else {
+		c.JSON(200, gin.H{"success": true, "data": existant})
+	}
+}
+
 
 /*
 {"data": {
@@ -100,11 +126,17 @@ func create_user(c *gin.Context) {
 		u.Password = val["password"].(string)
 
 	}
-	db.Save(&u, u.ID, "")
-	
-	c.JSON(200, gin.H{"success": true})
 
+	existant := getUserByMail(u.Mail)
+	
+	if existant.ID == "" {
+		db.Save(&u, u.ID, "")
+		c.JSON(200, gin.H{"success": true})
+	} else {
+		c.JSON(200, gin.H{"success": false})
+	}
 }
+
 
 
 func main() {
@@ -132,6 +164,8 @@ func main() {
 	r.GET("/api/getProjects", get_projects)
 	
 	r.POST("/api/getProjectById", get_projects_by_id)
+
+	r.POST("/api/connectUser", connect_user)
 	
 	r.POST("/api/createProject", create_project)
 	r.POST("/api/createUser", create_user)

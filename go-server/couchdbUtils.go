@@ -162,21 +162,11 @@ func createView(viewName string, designName string, code string) {
 
 }
 func createViews() {
-	id := createDummyProject()
+	createDummyProject()
 
 	createView("get_projects", "projects", "function(doc) {\n  if (doc.Type == \"Project\"){\n    emit(doc.ID, doc)\n  }\n}")
 	createView("get_rewards", "rewards", "function(doc) {\n if (doc.Type == \"Reward\") {\n    emit(doc.Project_ID, doc);\n  }\n}")
+	createView("get_users_by_mail", "user_mail", "function(doc) {\n if (doc.Type == \"User\") {\n    emit(doc.Mail, doc);\n  }\n}")
 	createView("get_users", "user", "function(doc) {\n if (doc.Type == \"User\") {\n    emit(doc.ID, doc);\n  }\n}")
 	
-	
-	project := getProjectById(id)
-	fmt.Println("projects: ", project)
-	getRewardByProject(id)
-
-	fmt.Println(getTransmittableProject(*project))
-
-	//	db.GetView("testView", view string, results interface{}, params *url.Values)
-
-/*	
-	}*/
 }
