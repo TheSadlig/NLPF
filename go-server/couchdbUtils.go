@@ -1,5 +1,7 @@
 package main
 import ("fmt"
+	"github.com/rhinoman/couchdb-go"
+	"time"
 	"github.com/nu7hatch/gouuid"
 )
 

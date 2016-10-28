@@ -1,8 +1,6 @@
 package main
 
 import( "github.com/gin-gonic/gin"
-	"github.com/rhinoman/couchdb-go"
-	"time"
 	"encoding/json"
 	"fmt")
 
