@@ -88,6 +88,7 @@ tipz.controller('addProject', ['$scope', '$http', function ($scope, $http) {
     		newProject.desc = "";
     		newProject.rewards = "";
     		newProject.userID = "";
+    		$scope.$parent.$parent.page = "home.html";
 	    }
 	    else {
         	console.log("There is no Rewards");
