@@ -1,11 +1,11 @@
  {"data": {
-"name": "Coucou",
-"desc": "yolo",
-"rewards" : [
-{ "name": "rew1", "value": "100", "desc": "rewdesc1"},
-{ "name": "rew1", "value" :"100", "desc": "rewdesc1"}
-],
-"date" : "03/12/1993",
-"userID" : "jyfjytfhytfjytfjytf"
-}                                                                                                               
+	"name": "Coucou",
+	"desc": "yolo",
+	"rewards" : [
+		{ "name": "rew1", "value": "100", "desc": "rewdesc1"},
+		{ "name": "rew1", "value" :"100", "desc": "rewdesc1"}
+		],
+	"date" : "03/12/1993",
+	"userID" : "jyfjytfhytfjytfjytf"
+	}                                                                                                               
 }
