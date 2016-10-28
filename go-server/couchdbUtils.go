@@ -44,6 +44,30 @@ type DesignDocument struct {
 	Lists    map[string]string `json:"lists"`
 }
 
+func getAuth() couchdb.BasicAuth {
+	return couchdb.BasicAuth{"admin", "admin"}
+}
+
+func getConn () *couchdb.Connection {
+	var timeout = time.Duration(50000 * time.Millisecond)
+	conn, _ := couchdb.NewConnection("127.0.0.1",5984,timeout)
+	return conn
+
+}
+func createDB () {
+	conn := getConn()
+	auth := getAuth()
+	conn.CreateDB("nlpf", &auth);
+}
+
+func getDB () *couchdb.Database {
+	conn := getConn()
+	auth := getAuth()
+	db := conn.SelectDB("nlpf", &auth)
+	
+	return db
+}
+
 func getUUID() string {
 	out, _ := uuid.NewV4()
 	return out.String()

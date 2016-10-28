@@ -15,49 +15,27 @@ func get_projects(c *gin.Context) {
 }
 
 func create_project(c *gin.Context) {
-	c.Writer.Header().Set("Content-Type", "application/json")
-        c.Writer.Header().Set("Access-Control-Allow-Origin", "*")
-        c.Writer.Header().Set("Access-Control-Allow-Headers", "Content-Type, Content-Length, Accept-Encoding, X-CSRF-Token, Authorization")
-
 	db := getDB()
 	
 	rawData := c.PostForm("data")
 
-	fmt.Println("raw:", rawData)
 	var parsed map[string]interface{}
- /*
- {"data": {
-"name": "Coucou",
-"desc": "yolo",
-"rewards" : [
-{ "name": "rew1", "value": "100", "desc": "rewdesc1"},
-{ "name": "rew1", "value" :"100", "desc": "rewdesc1"}
-],
-"date" : "03/12/1993",
-"userID" : "jyfjytfhytfjytfjytf"
-}                                                                                                               
-}
-*/
 	data :=[]byte(rawData)
 
-	err := json.Unmarshal(data, &parsed)
-	fmt.Println(err);
-	fmt.Println("JSON Content:");
-	fmt.Println("parsed:", parsed);
-	fmt.Println("parsed:", parsed["data"]);
+	json.Unmarshal(data, &parsed)
 	p := getEmptyProject()
 
 
 	val, ok := parsed["data"].(map[string]interface{})
-	fmt.Println(val)
+
 	if ok {
 		p.Description = val["desc"].(string)
 		p.Name = val["name"].(string)
 		p.Date = val["date"].(string)
 		p.User_ID = val["userID"].(string)
-		fmt.Println(p)
 		rawRewards := val["rewards"]
 		jsonRewards, ok := rawRewards.([]interface{})
+
 		if ok {
 			for _, v3 := range jsonRewards {
 				r, _ := v3.(map[string]interface{})
@@ -67,41 +45,49 @@ func create_project(c *gin.Context) {
 				reward.Description = r["desc"].(string)
 				value, _ := r["value"].(float64)
 				reward.Value = value
-				_, err = db.Save(&reward, reward.ID, "")
+				db.Save(&reward, reward.ID, "")
 			}
 		}
 	}
-	_, err = db.Save(&p, p.ID, "")
+	db.Save(&p, p.ID, "")
 	
 	c.JSON(200, gin.H{"success": true})
 
 }
 
 
-func getAuth() couchdb.BasicAuth {
-	return couchdb.BasicAuth{"admin", "admin"}
+/*
+{"data": {
+"lastname": "Gildas",
+"firstname": "lebel",
+"mail" : "gildaslebel@hezze.fr", "password": "efzeiluh"}
 }
-
-func getConn () *couchdb.Connection {
-	var timeout = time.Duration(50000 * time.Millisecond)
-	conn, err := couchdb.NewConnection("127.0.0.1",5984,timeout)
-	fmt.Println(err)
-	return conn
-
-}
-func createDB () {
-	conn := getConn()
-	auth := getAuth()
-	err := conn.CreateDB("nlpf", &auth);
-	fmt.Println(err)
-}
-
-func getDB () *couchdb.Database {
-	conn := getConn()
-	auth := getAuth()
-	db := conn.SelectDB("nlpf", &auth)
+*/
+func create_user(c *gin.Context) {
+	db := getDB()
 	
-	return db
+	rawData := c.PostForm("data")
+
+	var parsed map[string]interface{}
+	data :=[]byte(rawData)
+
+	json.Unmarshal(data, &parsed)
+	u := getEmptyUser()
+
+
+	val, ok := parsed["data"].(map[string]interface{})
+
+	if ok {
+		u.Lastname = val["lastname"].(string)
+		u.Firstname = val["firstname"].(string)
+		u.Mail = val["mail"].(string)
+		u.Password = val["password"].(string)
+
+	}
+	db.Save(&u, u.ID, "")
+	
+	c.JSON(200, gin.H{"success": true})
+
 }
 
 
@@ -129,5 +115,6 @@ func main() {
 	
 	r.GET("/api/getProjects", get_projects)
 	r.POST("/api/createProject", create_project)
+	r.POST("/api/createUser", create_user)
 	r.Run(":9090")
 }
