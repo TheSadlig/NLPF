@@ -1,49 +1,49 @@
 <div ng-controller="tipzHandler">
-		<br />
-		<br />
-		<br />
-		<div class="row">
-			<div class="col-xs-8">
-    			<div class="main">
-    				<div class="row">
-						<div class="col-xs-8 col-sm-6 col-sm-offset-1">
-							<h1> {{title}} </h1>
-							<form class="form-horizontal" accept-charset="utf-8">
-								<div class="form-group">
-									<fieldset class="col-md-8">
-	  									<label for="InscriptionLastname"> Nom : </label>
-	 									<input name="InscriptionLastname" ng-model="InscriptionLastname" value="" class="form-control" type="text"/>
-									</fieldset>
-								</div>
-								<div class="form-group">
-									<fieldset class="col-md-8">
-	  									<label for="InscriptionFirstname"> Prenom : </label>
-										<input ng-model="InscriptionFirstname" name="InscriptionFirstname" value="" class="form-control" type="text"/>
-									</fieldset>
-								</div>
-								<div class="form-group">
-									<fieldset class="col-md-8">
-	  									<label for="InscriptionMail"> Mail : </label>
-										<input ng-model="InscriptionMail" name="InscriptionMail" value="" class="form-control" type="text"/>
-									</fieldset>
-								</div>
-								<div class="form-group">
-									<fieldset class="col-md-8">
-										<label for="InscriptionPassword">Mot de passe : </label>
-										<input ng-model="InscriptionPassword" name="InscriptionPassword" value="" class="form-control" type="password"/>
-									</fieldset>
-								</div>
-								<div class="form-group">
-									<div class="col-md-offset-0 col-md-8">
-										<button ng-click="inscriptionClick()" class="btn btn-success btn btn-success" type="submit">
- 			 								S'inscrire
-										</button>
-									</div>
-								</div>
-							</form>
-						</div>
-					</div>
-				</div>
-			</div>
+  <br />
+  <br />
+  <br />
+  <div class="row">
+    <div class="col-xs-8">
+      <div class="main">
+    	<div class="row">
+	  <div class="col-xs-8 col-sm-6 col-sm-offset-1">
+	    <h1> {{title}} </h1>
+	    <form class="form-horizontal" accept-charset="utf-8">
+	      <div class="form-group">
+		<fieldset class="col-md-8">
+	  	  <label for="InscriptionLastname"> Nom : </label>
+	 	  <input name="InscriptionLastname" ng-model="InscriptionLastname" value="" class="form-control" type="text"/>
+		</fieldset>
+	      </div>
+	      <div class="form-group">
+		<fieldset class="col-md-8">
+	  	  <label for="InscriptionFirstname"> Prenom : </label>
+		  <input ng-model="InscriptionFirstname" name="InscriptionFirstname" value="" class="form-control" type="text"/>
+		</fieldset>
+	      </div>
+	      <div class="form-group">
+		<fieldset class="col-md-8">
+	  	  <label for="InscriptionMail"> Mail : </label>
+		  <input ng-model="InscriptionMail" name="InscriptionMail" value="" class="form-control" type="text"/>
+		</fieldset>
+	      </div>
+	      <div class="form-group">
+		<fieldset class="col-md-8">
+		  <label for="InscriptionPassword">Mot de passe : </label>
+		  <input ng-model="InscriptionPassword" name="InscriptionPassword" value="" class="form-control" type="password"/>
+		</fieldset>
+	      </div>
+	      <div class="form-group">
+		<div class="col-md-offset-0 col-md-8">
+		  <button ng-click="inscriptionClick()" class="btn btn-success btn btn-success" type="submit">
+ 		    S'inscrire
+		  </button>
 		</div>
+	      </div>
+	    </form>
+	  </div>
+	</div>
+      </div>
+    </div>
+  </div>
 </div>

@@ -1,6 +1,6 @@
 tipz.controller('addProject', ['$scope', '$http', 'NavigationService', function ($scope, $http, NavigationService) {    
     if (!NavigationService.isConnected())
-		$scope.$parent.$parent.page = "home.html";
+		$scope.$parent.$parent.changePage("home.html");
     $scope.title = "Mon Project";
     $scope.rewards = [];
     newProject = [];
@@ -90,7 +90,7 @@ tipz.controller('addProject', ['$scope', '$http', 'NavigationService', function 
     		newProject.desc = "";
     		newProject.rewards = "";
     		newProject.userID = "";
-    		$scope.$parent.$parent.page = "home.html";
+    		$scope.$parent.$parent.changePage("home.html");
 	    }
 	    else {
         	console.log("There is no Rewards");

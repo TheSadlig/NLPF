@@ -26,14 +26,14 @@
 	    <span class="icon-bar"></span>
 	    <span class="icon-bar"></span>
 	  </button>
-	  <a class="navbar-brand" ng-click="page='home.html'">Tipz</a>	
+	  <a class="navbar-brand" ng-click="changePage('home.html')">Tipz</a>	
 	</div>
 	<div class="navbar-collapse collapse">
 	  <ul class="nav navbar-nav navbar-right">
-	  	<li><a ng-click="page='bestproject.html'">Les meilleurs projets</a></li>
-	    <li><a ng-show="isConnected" ng-click="page='addproject.html'" >Ajouter un projet</a></li>
-	    <li><a ng-hide="isConnected" ng-click="page='inscription.html'">Inscription</a></li>
-	    <li><a ng-hide="isConnected" ng-click="page='connection.html'">Connexion</a></li>
+	    <li><a ng-click="changePage('bestproject.html')">Les meilleurs projets</a></li>
+	    <li><a ng-show="isConnected" ng-click="changePage('addproject.html')" >Ajouter un projet</a></li>
+	    <li><a ng-hide="isConnected" ng-click="changePage('inscription.html')">Inscription</a></li>
+	    <li><a ng-hide="isConnected" ng-click="changePage('connection.html')">Connexion</a></li>
 	  </ul>
 	</div>
       </div>

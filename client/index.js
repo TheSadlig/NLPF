@@ -5,6 +5,13 @@ tipz.controller('index', ['$scope', '$http', 'NavigationService', function ($sco
     $scope.page = "'home.html'";
     $scope.isConnected = false;
     $scope.error = "";
+    
+    $scope.changePage = function(page, error="") {
+        $scope.error = "";
+        $scope.page = page;
+        if (error != "")
+            $scope.error = error;
+    }
 }]);
 
 

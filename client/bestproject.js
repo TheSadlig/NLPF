@@ -15,7 +15,7 @@ tipz.controller('bestproject', ['$scope', '$http', 'NavigationService', function
         });
 
     $scope.loadFeed = function(e, p) {
-	$scope.$parent.$parent.page = "projectdescription.html";
+	$scope.$parent.$parent.changePage("projectdescription.html");
         NavigationService.setProjectID(p.ID);
     }
 }]);

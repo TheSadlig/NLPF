@@ -1,9 +1,8 @@
 tipz.controller('connection', ['$scope', '$http', 'NavigationService', function ($scope, $http, NavigationService) {    
     $scope.title = "Connexion";
     
-
-        $scope.redirection2Inscription = function() {
-    	$scope.$parent.$parent.page = "inscription.html";
+    $scope.redirection2Inscription = function() {
+    	$scope.$parent.$parent.changePage("inscription.html");
     };
 
     $scope.connectionclick = function() {
@@ -30,7 +29,7 @@ tipz.controller('connection', ['$scope', '$http', 'NavigationService', function 
                     console.log(data)
                     if (data.success == true) {
                     	NavigationService.setUser(data.data);
-                    	$scope.$parent.$parent.page = "home.html";
+                        $scope.$parent.$parent.changePage("home.html");
                         $scope.$parent.$parent.isConnected = true; // Ugly but works ;)
                     }
                     else {
