@@ -8,7 +8,7 @@ tipz.controller('rewarddescription', ['$scope', '$http', 'UserService', 'Navigat
                     data: {data:
                            { data:
                              {rewardID: NavigationService.reward.ID,
-                              userID: NavigationService.user.ID
+                              userID: NavigationService.User.ID
                              }
                            }
                           },

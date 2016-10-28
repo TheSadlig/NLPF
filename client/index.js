@@ -35,8 +35,8 @@ tipz.factory('NavigationService', function() {
     var setProject = function (project) {
     	this.project = project;
     }
-    var setUser = function (project) {
-    	this.user = user;
+    var setUser = function (User) {
+    	this.User = User;
     }
     
     return {
@@ -44,7 +44,7 @@ tipz.factory('NavigationService', function() {
         project: {},
         page : "",
         reward : {},
-        user: {},
+        User: {},
         setProjectID: setProjectID,
         setPage: setPage,
         setReward: setReward,

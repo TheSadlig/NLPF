@@ -1,4 +1,4 @@
-tipz.controller('addProject', ['$scope', '$http', function ($scope, $http) {    
+tipz.controller('addProject', ['$scope', '$http', 'UserService', 'NavigationService', function ($scope, $http, UserService, NavigationService) {    
     $scope.title = "Mon Project";
     $scope.rewards = [];
     newProject = [];
@@ -55,7 +55,7 @@ tipz.controller('addProject', ['$scope', '$http', function ($scope, $http) {
 		today = dd+'/'+mm+'/'+yyyy;
 		
 		newProject.date = today;
-		newProject.userID = "";
+		newProject.userID = NavigationService.User.ID;
 
                 $http({
                     method: 'POST',
