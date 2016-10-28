@@ -11,7 +11,7 @@ tipz.controller('connection', ['$scope', '$http', function ($scope, $parent, $ht
     }
 
     $scope.connectionClick = function() {
-    
+    	
     }
 
 }]);

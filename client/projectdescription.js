@@ -1,7 +1,7 @@
-tipz.controller('projectdescription', ['$scope', '$http', function ($scope, $http) {    
+tipz.controller('projectdescription', ['$scope', '$http', function ($scope, $parent, $http) {    
     
-    console.log($scope.$parent);
-    
-    $scope.title = "";
+    	console.log();
+    	$scope.title = "";
+
     
 }]);

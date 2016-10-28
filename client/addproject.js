@@ -1,6 +1,5 @@
 tipz.controller('addProject', ['$scope', '$http', function ($scope, $http) {    
     $scope.title = "Mon Project";
-    console.log("plop")
     $scope.rewards = [];
     newProject = [];
     $scope.newRewardValue = 0;

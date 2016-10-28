@@ -14,9 +14,9 @@ tipz.controller('home', ['$scope', '$http', function ($scope, $http) {
     });
 
 	$scope.loadFeed = function(e, p) {
-		console.log($scope.$parent);
-		$scope.projectID = p.name;
-		//console.log($scope.project);
+		//$scope.projectID = p.Name;
+		//console.log($scope);
+
 		$scope.$parent.$parent.page = "projectdescription.html";
 
     }
