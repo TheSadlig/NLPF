@@ -15,6 +15,6 @@ tipz.controller('home', ['$scope', '$http', 'UserService', 'NavigationService', 
 
     $scope.loadFeed = function(e, p) {
 	$scope.$parent.$parent.page = "projectdescription.html";
-        NavigationService.setProjectName(p.Name);
+        NavigationService.setProjectID(p.ID);
     }
 }]);

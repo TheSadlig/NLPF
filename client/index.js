@@ -20,18 +20,35 @@ tipz.factory('UserService', function() {
 
 // All data used for navigation
 tipz.factory('NavigationService', function() {
-    var setProjectName = function (name) {
-        this.projectName = name;
+    var setProjectID = function (name) {
+        this.projectID = name;
     }
     
     var setPage = function (page) {
         this.page = page;
     }
     
+    var setReward = function (reward) {
+    	this.reward = reward;
+    }
+    
+    var setProject = function (project) {
+    	this.project = project;
+    }
+    var setUser = function (project) {
+    	this.user = user;
+    }
+    
     return {
-        projectName: "",
+        projectID: "",
+        project: {},
         page : "",
-        setProjectName: setProjectName,
-        setPage: setPage
+        reward : {},
+        user: {},
+        setProjectID: setProjectID,
+        setPage: setPage,
+        setReward: setReward,
+        setProject: setProject,
+        setUser: setUser
     };
 });

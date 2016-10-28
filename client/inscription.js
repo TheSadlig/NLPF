@@ -23,7 +23,10 @@ tipz.controller('tipzHandler', ['$scope', '$http', function ($scope, $http) {
                     headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
                 }).success(function(data){
                     console.log(data)
-                });
+                    if (data.success == false) {
+						
+                    }
+                })
     }
     
 }]);

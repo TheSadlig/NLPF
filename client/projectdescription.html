@@ -17,11 +17,11 @@
        			</tr>
        		</thead>
     		<tbody>
-      			<tr>
-       				 <td>John</td>
-        			 <td>Doe</td>
-        			 <td>Ceci est un super projet</td>
-        			 <td> <button ng-click="selectionClick">Selectionner !</button>
+				<tr ng-repeat = "r in projectRewards">
+    				<td>{{r.Title}}</td>
+    				<td>{{r.Value}}</td>
+        			<td>{{r.Description}}</td>
+        			<td> <button ng-click="loadFeed($event,r)">Selectionner</button>
      			</tr>
      		</tbody>
      	</table>	
