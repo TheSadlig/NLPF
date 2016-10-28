@@ -72,8 +72,29 @@ func create_project(c *gin.Context) {
 }
 
 func connect_user(c *gin.Context) {
-//	db := getDB()
+	rawData := c.PostForm("data")
 
+	var parsed map[string]interface{}
+	data :=[]byte(rawData)
+
+	json.Unmarshal(data, &parsed)
+
+	val, ok := parsed["data"].(map[string]interface{})
+	mail := ""
+	password := ""
+	
+	if ok {
+		mail = val["mail"].(string)
+		password = val["password"].(string)
+	}
+
+	existant := getUserByMail(mail)
+	
+	if existant.ID == "" || existant.Password != password {
+		c.JSON(200, gin.H{"success": false})
+	} else {
+		c.JSON(200, gin.H{"success": true, "data": existant})
+	}
 }
 
 
@@ -114,9 +135,6 @@ func create_user(c *gin.Context) {
 	} else {
 		c.JSON(200, gin.H{"success": false})
 	}
-	
-	
-
 }
 
 
