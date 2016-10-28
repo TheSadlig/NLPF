@@ -1,28 +1,28 @@
 <div ng-controller="projectdescription">
-		<br />
-		<br />
-		<br />
-		<h1> {{title}} </h1>
-		<br />
-		<p> {{projectDescription}}</p>
-		<p>Par : {{projectAuthor}}</p>
-		<p>Contact : {{projectMail}}</p>
-		<table class="table">
-   			<thead>
-      			<tr>
-        			<th>Nom</th>
-        			<th>Valeur</th>
-       				<th>Description</th>
-       				<th>Selectionner</th>
-       			</tr>
-       		</thead>
-    		<tbody>
-				<tr ng-repeat = "r in projectRewards">
-    				<td>{{r.Title}}</td>
-    				<td>{{r.Value}} euros / mois</td>
-        			<td>{{r.Description}}</td>
-        			<td> <button ng-click="loadFeed($event,r)">Selectionner</button>
-     			</tr>
-     		</tbody>
-     	</table>	
+  <br />
+  <br />
+  <br />
+  <h1> {{title}} </h1>
+  <br />
+  <p> {{projectDescription}}</p>
+  <p>Par : {{projectAuthor}}</p>
+  <p>Contact : {{projectMail}}</p>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Nom</th>
+        <th>Valeur</th>
+       	<th>Description</th>
+       	<th>Selectionner</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr ng-repeat = "r in projectRewards | orderBy: 'Value'">
+    	<td>{{r.Title}}</td>
+    	<td>{{r.Value}} euros / mois</td>
+        <td>{{r.Description}}</td>
+        <td> <button ng-click="loadFeed($event,r)">Selectionner</button>
+      </tr>
+    </tbody>
+  </table>	
 </div>
