@@ -137,6 +137,34 @@ func create_user(c *gin.Context) {
 	}
 }
 
+func invest(c *gin.Context) {
+	db := getDB()
+	
+	rawData := c.PostForm("data")
+
+	var parsed map[string]interface{}
+	data :=[]byte(rawData)
+
+	json.Unmarshal(data, &parsed)
+
+	invest := getEmptyInvestment()
+	
+	val, ok := parsed["data"].(map[string]interface{})
+
+	rewardID := ""
+	userID := ""
+	
+	if ok {
+		rewardID = val["rewardID"].(string)
+		userID = val["userID"].(string)
+	}
+	invest.Reward_ID = rewardID
+	invest.User_ID = userID
+
+	db.Save(&invest, invest.ID, "")
+	c.JSON(200, gin.H{"success": true})
+}
+
 
 
 func main() {
@@ -166,6 +194,8 @@ func main() {
 	r.POST("/api/getProjectById", get_projects_by_id)
 
 	r.POST("/api/connectUser", connect_user)
+
+	r.POST("/api/invest", invest)
 	
 	r.POST("/api/createProject", create_project)
 	r.POST("/api/createUser", create_user)
