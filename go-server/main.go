@@ -112,6 +112,8 @@ func main() {
 	fmt.Println("Liste des projets: ", getProjects())
 	
 	r.GET("/api/getProjects", get_projects)
+	r.POST("/api/getRewardsByProject", create_user)
+	
 	r.POST("/api/createProject", create_project)
 	r.POST("/api/createUser", create_user)
 	r.Run(":9090")

@@ -21,6 +21,7 @@ rewards
 */
 
 type TransmittableProject struct {
+	ID string
 	Name string
 	Description string
 	Rewards []Reward
@@ -98,6 +99,7 @@ func getTransmittableProject(project Project) *TransmittableProject {
 	transmitProject.Name = project.Name
 	transmitProject.Description = project.Description
 	transmitProject.Date = project.Date
+	transmitProject.ID = project.ID
 	transmitProject.Rewards = *getRewardByProject(project.ID)
 	fmt.Println("transmit:", transmitProject)
 	user := getUserById(project.User_ID)
