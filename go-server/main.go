@@ -71,6 +71,11 @@ func create_project(c *gin.Context) {
 
 }
 
+func connect_user(c *gin.Context) {
+//	db := getDB()
+
+}
+
 
 /*
 {"data": {
@@ -100,11 +105,20 @@ func create_user(c *gin.Context) {
 		u.Password = val["password"].(string)
 
 	}
-	db.Save(&u, u.ID, "")
+
+	existant := getUserByMail(u.Mail)
 	
-	c.JSON(200, gin.H{"success": true})
+	if existant.ID == "" {
+		db.Save(&u, u.ID, "")
+		c.JSON(200, gin.H{"success": true})
+	} else {
+		c.JSON(200, gin.H{"success": false})
+	}
+	
+	
 
 }
+
 
 
 func main() {
@@ -132,6 +146,8 @@ func main() {
 	r.GET("/api/getProjects", get_projects)
 	
 	r.POST("/api/getProjectById", get_projects_by_id)
+
+	r.POST("/api/connectUser", connect_user)
 	
 	r.POST("/api/createProject", create_project)
 	r.POST("/api/createUser", create_user)
