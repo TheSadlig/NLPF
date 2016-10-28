@@ -15,11 +15,15 @@ func get_projects(c *gin.Context) {
 }
 
 func create_project(c *gin.Context) {
+	c.Writer.Header().Set("Content-Type", "application/json")
+        c.Writer.Header().Set("Access-Control-Allow-Origin", "*")
+        c.Writer.Header().Set("Access-Control-Allow-Headers", "Content-Type, Content-Length, Accept-Encoding, X-CSRF-Token, Authorization")
+
 	db := getDB()
 	
 	rawData := c.PostForm("data")
 
-
+	fmt.Println("raw:", rawData)
 	var parsed map[string]interface{}
  /*
  {"data": {
@@ -100,11 +104,21 @@ func getDB () *couchdb.Database {
 	return db
 }
 
+
 func main() {
 // Creates a gin router with default middleware:
 // logger and recovery (crash-free) middleware
-	router := gin.Default()
-
+	//	router := gin.Default()
+	r := gin.New()
+	r.Use(func (c *gin.Context) {
+		c.Header("Access-Control-Allow-Origin", "*")
+		if c.Request.Method == "OPTIONS" {
+			if len(c.Request.Header["Access-Control-Request-Headers"]) > 0 {
+				c.Header("Access-Control-Allow-Headers", c.Request.Header["Access-Control-Request-Headers"][0])
+			}
+			c.AbortWithStatus(200)
+		}
+	})
 	createDB()
 	
 
@@ -113,7 +127,7 @@ func main() {
 
 	fmt.Println("Liste des projets: ", getProjects())
 	
-	router.GET("/api/getProjects", get_projects)
-	router.POST("/api/createProject", create_project)
-	router.Run(":9090")
+	r.GET("/api/getProjects", get_projects)
+	r.POST("/api/createProject", create_project)
+	r.Run(":9090")
 }
